@@ -1,14 +1,60 @@
-import { Send, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { Send, Sparkles, ChevronLeft } from 'lucide-react';
 
 export default function LearningScreen() {
+  const [showChat, setShowChat] = useState(false);
+
+  if (!showChat) {
+    return (
+      <div className="h-full flex flex-col bg-neutral-900 relative">
+        <div className="px-6 py-4 bg-white border-b border-neutral-100 flex justify-between items-center z-10">
+          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Interactive Learn</h1>
+        </div>
+        
+        <div className="flex-1 relative overflow-hidden flex items-center justify-center bg-neutral-800">
+          {/* Car Image - Reliable Car Photo */}
+          <img 
+            src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=800" 
+            alt="Car to learn about" 
+            className="w-full h-full object-contain opacity-90 p-4"
+            referrerPolicy="no-referrer"
+          />
+          
+          {/* Hotspot Button on the Hood */}
+          <button 
+            onClick={() => setShowChat(true)}
+            className="absolute top-[55%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(249,115,22,0.6)] hover:scale-110 transition-transform cursor-pointer group"
+          >
+            <span className="absolute w-full h-full rounded-full border-2 border-orange-500 animate-ping opacity-75 group-hover:animate-none"></span>
+            <span className="font-bold text-2xl relative z-10">?</span>
+          </button>
+
+          <div className="absolute bottom-10 left-0 right-0 flex justify-center pointer-events-none">
+            <div className="bg-black/60 backdrop-blur-md text-white px-6 py-3 rounded-full font-medium text-sm shadow-lg border border-white/10">
+              Tap the <span className="text-orange-400 font-bold">?</span> on the hood to learn
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="h-full flex flex-col bg-white">
-      <div className="px-6 py-4 border-b border-neutral-100 bg-white/80 backdrop-blur-md sticky top-0 z-10">
-        <h1 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
-          <Sparkles className="text-orange-500" size={20} />
-          Cinder AI
-        </h1>
-        <p className="text-sm text-neutral-500">Your personal car expert</p>
+    <div className="h-full flex flex-col bg-white animate-in slide-in-from-right-full duration-300">
+      <div className="px-4 py-4 border-b border-neutral-100 bg-white/80 backdrop-blur-md sticky top-0 z-10 flex items-center gap-3">
+        <button 
+          onClick={() => setShowChat(false)}
+          className="p-2 -ml-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 rounded-full transition-colors"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <div>
+          <h1 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
+            <Sparkles className="text-orange-500" size={20} />
+            Cinder AI
+          </h1>
+          <p className="text-xs text-neutral-500">Transmission Expert</p>
+        </div>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6 pb-24">
